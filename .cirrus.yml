@@ -3,6 +3,6 @@ freebsd_instance:
 
 task:
     build_script: ASSUME_ALWAYS_YES=yes pkg bootstrap -f
-    install_script: make BATCH=yes -C package
+    install_script: make BATCH=yes package
     binaries_artifacts:
         path: "/usr/ports/packages/*"
