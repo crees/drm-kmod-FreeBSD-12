@@ -3,8 +3,13 @@ task:
       matrix:
         - image: freebsd-12-1-release-amd64
         - image: freebsd-12-2-release-amd64
+        - image: freebsd-12-2-release-i386
 
-    build_script: ASSUME_ALWAYS_YES=yes pkg bootstrap -f
-    install_script: make BATCH=yes package
+    build_script:
+      - ASSUME_ALWAYS_YES=yes pkg bootstrap -f
+      - pkg install -y graphics/gpu-firmware-kmod
+    install_script: 
+      - make BATCH=yes package
+      - mv work/pkg/* drm-fbsd12.0-kmod-$(uname -mr | sed 's,-[^-]*-[^[:space:]]* ,,').txz
     binaries_artifacts:
-        path: "work/pkg/*"
+        path: drm-fbsd12.0-kmod-*.txz
