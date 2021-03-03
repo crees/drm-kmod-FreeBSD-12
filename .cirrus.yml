@@ -9,6 +9,6 @@ task:
       - pkg install -y graphics/gpu-firmware-kmod
     install_script: 
       - make BATCH=yes package
-      - mv work/pkg/* "drm-fbsd12.0-kmod-$(uname -mr | sed 's,-[^-]*-[^[:space:]]* ,,').txz"
+      - mv work/pkg/* "drm-fbsd12.0-kmod-$(uname -r | sed 's,-.*,,')$(uname -m).txz"
     binaries_artifacts:
         path: drm-fbsd12.0-kmod-*.txz
